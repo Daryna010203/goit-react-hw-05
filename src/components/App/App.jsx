@@ -1,106 +1,36 @@
 import css from './App.module.css';
-import axios from 'axios';
 
-import { useState, useEffect } from 'react';
+import clsx from 'clsx';
+import { Route, Routes } from 'react-router-dom';
 
-import SearchBar from '../SearchBar/SearchBar.jsx';
-import ImageGallery from '../ImageGallery/ImageGallery.jsx';
-import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn.jsx';
-import ErrorMessage from '../ErrorMessage/ErrorMessage.jsx';
-import ImageModal from '../ImageModal/ImageModal.jsx';
-import Loader from '../Loader/Loader.jsx';
+import HomePage from '../../pages/HomePage/HomePage';
+import MoviesPage from '../../pages/MoviesPage/MoviesPage';
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
+import MovieDetailsPage from '../../pages/MovieDetailsPage/MovieDetailsPage';
+import MovieCast from '../MovieCast/MovieCast';
+import MovieReviews from '../MovieReviews/MovieReviews';
+import Navigation from '../Navigation/Navigation';
 
-const App = () => {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [query, setQuery] = useState(null);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const onSearch = userSearch => {
-    setQuery(userSearch);
-    setPage(1);
-    setImages([]);
-  };
-
-  useEffect(() => {
-    if (query === null) return;
-    async function fetchImages() {
-      try {
-        setError(null);
-        setLoading(true);
-
-        const response = await axios.get(
-          `https://api.unsplash.com/search/photos?client_id=31vOygG6dJTDM4WYDN9lcflKaCM7oYZNQcHe6lBV_Co&page=${page}&per_page=12&query=${query}`
-        );
-        console.log(response);
-
-        const fetchedImages = response.data.results;
-        const totalPages = response.data.total_pages;
-
-        setImages(prevImages => [...prevImages, ...fetchedImages]);
-        setTotalPages(totalPages);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchImages();
-  }, [query, page]);
-
-  const loadMoreImages = () => {
-    if (page < totalPages) {
-      setPage(prevPage => prevPage + 1);
-    }
-  };
-  useEffect(() => {
-    if (page >= 1) {
-      setTimeout(() => {
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: 'smooth',
-        });
-      }, 500);
-    }
-  }, [images, page]);
-
-  const openImageModal = (imageUrl, imageAlt) => {
-    setSelectedImage({ imageUrl, imageAlt });
-  };
-
-  const closeImageModal = () => {
-    setSelectedImage(null);
-  };
-
+function App() {
   return (
-    <section>
-      <div className={css.search}>
-        <SearchBar onSearch={onSearch} />
+    <div>
+      <Navigation />
+      <div style={{ display: 'flex' }}>
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/movies" element={<MoviesPage />} />
+            <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+              <Route path="cast" element={<MovieCast />} />
+              <Route path="reviews" element={<MovieReviews />} />
+            </Route>
+
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
       </div>
-
-      {error && <ErrorMessage error={error} />}
-      {images.length > 0 && (
-        <ImageGallery items={images} onImageClick={openImageModal} />
-      )}
-      {images.length > 0 && page < totalPages && !loading && (
-        <LoadMoreBtn onClick={loadMoreImages} />
-      )}
-      {loading && <Loader />}
-
-      {selectedImage && (
-        <ImageModal
-          isOpen={!!selectedImage}
-          onRequestClose={closeImageModal}
-          imageUrl={selectedImage.imageUrl}
-          imageAlt={selectedImage.imageAlt}
-        />
-      )}
-    </section>
+    </div>
   );
-};
+}
 
 export default App;
