@@ -15,7 +15,7 @@ function App() {
   return (
     <div>
       <Navigation />
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', gap: '20' }}>
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />

@@ -1,14 +1,9 @@
 import axios from 'axios';
 
-const token =
-  eyJhbGciOiJIUzI1NiJ9
-    .eyJhdWQiOiIxZjcxNDAyNmNiZmYwOTgxYWI0ZjBjYzQwMmNlM2IwMiIsIm5iZiI6MTczMDE1MDk1MC4yNjE1MzEsInN1YiI6IjY3MTdmZjU4NmQ2YjcwNWRjODcwZjAyNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ
-    .YoMAYmqoWrD356XQk1aJ2pmN6dRjZTwrnXaq_PXSkQk;
-
 const movieInstance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
   headers: {
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZjcxNDAyNmNiZmYwOTgxYWI0ZjBjYzQwMmNlM2IwMiIsIm5iZiI6MTczMDIzMjMwOC43MDEzNDE2LCJzdWIiOiI2NzE3ZmY1ODZkNmI3MDVkYzg3MGYwMjQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.sXIqD2iLM-iNmKKFYrUWb3iNKFT2LkrhSEXw3ZUyu9A`,
   },
   params: {
     api_key: '1f714026cbff0981ab4f0cc402ce3b02',
@@ -18,10 +13,8 @@ const movieInstance = axios.create({
   },
 });
 
-export const getTrendingmovies = async params => {
-  const { data } = await movieInstance.get('/trending/movie/day', {
-    params,
-  });
+export const getTrendingmovies = async () => {
+  const { data } = await movieInstance.get('/trending/movie/day');
   return data;
 };
 
