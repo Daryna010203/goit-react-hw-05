@@ -5,13 +5,14 @@ import { getMovieReviews } from '../../api/movies';
 
 const MovieReviews = () => {
   const { movieId } = useParams();
+  console.log('Current movieId:', movieId); // Log the movieId
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMovieReviews = async () => {
       try {
-        const data = await getMovieReviews();
+        const data = await getMovieReviews(movieId);
         setReviews(data.results);
 
         console.log('Fetched Reviews Data:', data);
@@ -35,22 +36,19 @@ const MovieReviews = () => {
 
   console.log('Current reviews state:', reviews);
 
-  if (reviews.length === 0) {
-    return <p>There are no reviews yet...</p>;
-  }
-
   return (
     <div className={css.reviews}>
       <h2>Reviews</h2>
-      <ul>
-        {reviews.map(review => (
-          <li key={review.id} className={css.reviewItem}>
-            <h2> {review.id}</h2>
-            <h3>{review.author}</h3>
-            <p>{review.content}</p>
-          </li>
-        ))}
-      </ul>
+      {reviews.length > 0 && (
+        <ul>
+          {reviews.map(review => (
+            <li key={review.id}>
+              <p className={css.reviewAuthorDescr}>Author: {review.author}</p>
+              <p>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

@@ -1,0 +1,22 @@
+.position {
+  display: flex;
+  gap: 22px;
+}
+
+.average {
+  border: 1px solid black;
+  font-size: 1em;
+  padding: 6px;
+}
+
+.geners {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.inform {
+  display: flex;
+  gap: 12px;
+  font-size: 1em;
+}

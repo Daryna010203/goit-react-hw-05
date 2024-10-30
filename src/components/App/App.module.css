@@ -1,10 +1,103 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Цветовая палитра */
+:root {
+  --primary-color: #144139; /* Темно-зеленый */
+  --accent-color: #027653; /* Нейтральный зеленовато-серый */
+  --text-color: #333; /* Темный текст */
+  --background-color: #d5e2e2; /* Светлый фон */
+  --hover-color: #566d68; /* Темный оттенок зеленого для наведения */
 }
 
-.title {
+/* Общие стили */
+body {
+  font-family: 'Helvetica', sans-serif;
+  line-height: 32px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* Заголовки */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0.5em 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+/* Кнопки */
+button {
+  background-color: var(--primary-color);
+  color: #f7f9f9;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: var(--hover-color);
+  transform: scale(1.03);
+}
+
+button:active {
+  background-color: #2e3e3a;
+  box-shadow: none;
+}
+
+/* Ссылки */
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-color);
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+
+a:hover {
+  color: var(--hover-color);
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+main {
   padding: 12px;
+  width: 700px;
+  margin: 0 auto;
+  background-color: #f7f9f9;
 }

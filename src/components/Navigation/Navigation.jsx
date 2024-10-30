@@ -6,12 +6,12 @@ const Navigation = () => {
   const buildCssClasses = ({ isActive }) =>
     clsx(css.link, { [css.active]: isActive });
   return (
-    <div>
+    <div className={css.navigate}>
       <NavLink className={buildCssClasses} to="/">
-        Home
+        <span className={css.text}>Home</span>
       </NavLink>
       <NavLink className={buildCssClasses} to="/movies">
-        Movies
+        <span className={css.text}>Movies</span>
       </NavLink>
     </div>
   );
