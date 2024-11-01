@@ -10,7 +10,6 @@
 /* Общие стили */
 body {
   font-family: 'Helvetica', sans-serif;
-  line-height: 32px;
   background-color: var(--background-color);
   color: var(--text-color);
   margin: 0;
@@ -96,8 +95,9 @@ a:hover::after {
 }
 
 main {
-  padding: 12px;
+  padding: 16px;
   width: 700px;
   margin: 0 auto;
   background-color: #f7f9f9;
+  border-radius: 4px;
 }

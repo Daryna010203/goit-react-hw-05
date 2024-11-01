@@ -13,15 +13,15 @@ const movieInstance = axios.create({
   },
 });
 
-export const getTrendingmovies = async () => {
-  const { data } = await movieInstance.get('/trending/movie/day');
+export const getTrendingmovies = async params => {
+  const { data } = await movieInstance.get('/trending/movie/day', { params });
   return data;
 };
 
-export const searchMovies = async q => {
+export const searchMovies = async query => {
   const { data } = await movieInstance.get('/search/movie', {
     params: {
-      q,
+      query,
     },
   });
   return data;

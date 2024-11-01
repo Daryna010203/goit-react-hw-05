@@ -1,4 +1,4 @@
-import css from './SearchBar.module.css';
+import css from './Search.module.css';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { TfiSearch } from 'react-icons/tfi';
 
@@ -29,7 +29,7 @@ const SearchBar = ({ onSearch }) => {
               type="text"
               className={css.text}
               name="userSearch"
-              placeholder="Search images and photos"
+              placeholder="Search movies..."
               autoFocus
             />
             <ErrorMessage

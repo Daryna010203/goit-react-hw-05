@@ -2,16 +2,21 @@ import css from './MovieReviews.module.css';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieReviews } from '../../api/movies';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/Error/ErrorMessage';
 
 const MovieReviews = () => {
   const { movieId } = useParams();
-  console.log('Current movieId:', movieId); // Log the movieId
+  console.log('Current movieId:', movieId);
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchMovieReviews = async () => {
       try {
+        setError(null);
+        setLoading(true);
         const data = await getMovieReviews(movieId);
         setReviews(data.results);
 
@@ -25,7 +30,9 @@ const MovieReviews = () => {
         }
       } catch (error) {
         console.error('Error fetching reviews:', error.message);
-        setError('Error fetching reviews: ' + error.message);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -34,21 +41,23 @@ const MovieReviews = () => {
     }
   }, [movieId]);
 
-  console.log('Current reviews state:', reviews);
-
   return (
     <div className={css.reviews}>
-      <h2>Reviews</h2>
+      <h3>Reviews</h3>
+      {loading && <Loader />}
+      {reviews.length === 0 && <p> We don`t have any reviews</p>}
       {reviews.length > 0 && (
         <ul>
           {reviews.map(review => (
-            <li key={review.id}>
+            <li className={css.list} key={review.id}>
               <p className={css.reviewAuthorDescr}>Author: {review.author}</p>
               <p>{review.content}</p>
             </li>
           ))}
         </ul>
       )}
+
+      {error && <ErrorMessage error={error} />}
     </div>
   );
 };

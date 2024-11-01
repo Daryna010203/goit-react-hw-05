@@ -1,0 +1,12 @@
+.reviewAuthorDescr {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.list {
+  border-radius: 8px;
+  border: 1px solid black;
+  box-shadow: 0px 5px 10px 0px rgba(103, 165, 136, 0.5);
+  padding: 10px;
+  margin-bottom: 10px;
+}
