@@ -1,4 +1,5 @@
 import css from './Loader.module.css';
+
 import { LineWave } from 'react-loader-spinner';
 
 const Loader = () => {

@@ -9,19 +9,22 @@ const movieInstance = axios.create({
     api_key: '1f714026cbff0981ab4f0cc402ce3b02',
     include_adult: false,
     language: 'en-US',
-    page: '1',
   },
 });
 
-export const getTrendingmovies = async params => {
-  const { data } = await movieInstance.get('/trending/movie/day', { params });
+export const getTrendingmovies = async (params, page = 1) => {
+  const { data } = await movieInstance.get('/trending/movie/day', {
+    params,
+    page,
+  });
   return data;
 };
 
-export const searchMovies = async query => {
+export const searchMovies = async (query, page) => {
   const { data } = await movieInstance.get('/search/movie', {
     params: {
       query,
+      page,
     },
   });
   return data;

@@ -2,10 +2,12 @@ import css from './MovieCast.module.css';
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieCredits } from '../../api/movies';
+
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/Error/ErrorMessage';
 import { BsPersonCircle } from 'react-icons/bs';
+
+import { getMovieCredits } from '../../api/movies';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -22,17 +24,12 @@ const MovieCast = () => {
         setLoading(true);
 
         const data = await getMovieCredits(movieId);
-        console.log(data.cast);
         setCasts(data.cast);
-
-        console.log('Fetched Casts Data:', data);
 
         if (data && data.cast) {
           setCasts(data.cast.slice(0, 12));
         } else {
           setCasts([]);
-
-          console.warn('No casts found in the response');
         }
       } catch (error) {
         setError(error.message);
@@ -45,8 +42,6 @@ const MovieCast = () => {
       fetchMovieCast();
     }
   }, [movieId]);
-
-  console.log(casts);
 
   return (
     <div className={css.cast}>

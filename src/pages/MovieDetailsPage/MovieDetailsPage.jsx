@@ -1,6 +1,6 @@
 import css from './MovieDetailsPage.module.css';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import {
   Link,
   useNavigate,
@@ -8,6 +8,7 @@ import {
   useParams,
   Outlet,
 } from 'react-router-dom';
+
 import { getMovieDetails } from '../../api/movies';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/Error/ErrorMessage';
@@ -74,11 +75,12 @@ function MovieDetailsPage() {
           <p>{movie.overview}</p>
 
           <h3>Genres</h3>
-          <p className={css.geners}>
+
+          <li className={css.geners}>
             {movie.genres.map(genre => (
               <span key={genre.id}>{genre.name}</span>
             ))}
-          </p>
+          </li>
         </div>
         {error && <ErrorMessage error={error} />}
       </div>
@@ -93,7 +95,9 @@ function MovieDetailsPage() {
           Reviews
         </Link>
       </div>
-      <Outlet />
+      <Suspense fallback={<div className={css.text}>Loading subpage...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 }

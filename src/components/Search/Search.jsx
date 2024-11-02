@@ -1,28 +1,31 @@
 import css from './Search.module.css';
+
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import { TfiSearch } from 'react-icons/tfi';
-
 import toast, { Toaster } from 'react-hot-toast';
 
-const initialValues = { userSearch: '' };
+const SearchBar = ({ onSearch, initialQuery }) => {
+  const initialValues = { userSearch: initialQuery || '' };
 
-const SearchBar = ({ onSearch }) => {
   const handleSubmit = (values, actions) => {
     if (!values.userSearch.trim()) {
       toast.error('Enter a search word');
       return;
     }
     onSearch(values.userSearch);
-
-    actions.resetForm();
+    actions.resetForm({ values: { userSearch: values.userSearch } });
   };
 
   return (
-    <header className={css.header}>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <div className={css.header}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        enableReinitialize
+      >
         <Form className={css.form}>
           <div>
-            <button type="submit" name="userSearch" className={css.Btn}>
+            <button type="submit" name="userSearch">
               <TfiSearch />
             </button>
             <Field
@@ -41,7 +44,7 @@ const SearchBar = ({ onSearch }) => {
           <Toaster />
         </Form>
       </Formik>
-    </header>
+    </div>
   );
 };
 
