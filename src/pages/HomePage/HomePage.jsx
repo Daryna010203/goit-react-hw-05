@@ -33,8 +33,8 @@ const HomePage = () => {
     <div className={css.homePage}>
       <h2>Trending Movies</h2>
       {error && <ErrorMessage error={error} />}
-      <MovieList movies={movies} />
       {loading && <Loader />}
+      <MovieList movies={movies} />
     </div>
   );
 };

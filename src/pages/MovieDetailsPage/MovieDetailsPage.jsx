@@ -59,9 +59,9 @@ function MovieDetailsPage() {
         <div>
           {movie.poster_path ? (
             <img
+              className={css.image}
               src={`${IMAGE_BASE_URL}${movie.poster_path}`}
               alt={`${movie.title} poster`}
-              style={{ width: '300px', borderRadius: '8px' }}
             />
           ) : (
             <p>No poster available</p>
@@ -95,7 +95,7 @@ function MovieDetailsPage() {
           Reviews
         </Link>
       </div>
-      <Suspense fallback={<div className={css.text}>Loading subpage...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </div>

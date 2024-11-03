@@ -24,3 +24,8 @@
 .text {
   margin-top: 8px;
 }
+
+.image {
+  width: 300px;
+  border-radius: 8px;
+}
