@@ -87,11 +87,3 @@ a:hover {
 a:hover::after {
   width: 100%;
 }
-
-main {
-  padding: 16px;
-  width: 700px;
-  margin: 0 auto;
-  background-color: #f7f9f9;
-  border-radius: 4px;
-}

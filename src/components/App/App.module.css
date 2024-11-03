@@ -1,0 +1,11 @@
+.container {
+  padding: 16px;
+  width: 700px;
+  margin: 0 auto;
+  background-color: #f7f9f9;
+  border-radius: 4px;
+}
+
+.header {
+  margin-bottom: 12px;
+}

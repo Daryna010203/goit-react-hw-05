@@ -1,6 +1,6 @@
 import css from './MovieDetailsPage.module.css';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Link,
   useNavigate,
@@ -95,9 +95,7 @@ function MovieDetailsPage() {
           Reviews
         </Link>
       </div>
-      <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense>
+      <Outlet />
     </div>
   );
 }
