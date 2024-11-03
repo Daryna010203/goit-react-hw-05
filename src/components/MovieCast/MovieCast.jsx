@@ -53,9 +53,9 @@ const MovieCast = () => {
             <li key={cast.id} className={css.card}>
               {cast.profile_path ? (
                 <img
+                  className={css.images}
                   src={`${IMAGE_BASE_URL}${cast.profile_path}`}
                   alt={`${cast.name} poster`}
-                  style={{ maxWidth: '120px', borderRadius: '8px' }}
                 />
               ) : (
                 <div className={css.avatar}>

@@ -44,7 +44,7 @@ const MovieReviews = () => {
       {loading && <Loader />}
       {reviews.length === 0 && <p> We don`t have any reviews</p>}
       {reviews.length > 0 && (
-        <ul>
+        <ul className={css.iteam}>
           {reviews.map(review => (
             <li className={css.list} key={review.id}>
               <p className={css.reviewAuthorDescr}>Author: {review.author}</p>
