@@ -2,21 +2,16 @@
   font-weight: 600;
 }
 
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 .avatar {
   display: flex;
   gap: 6px;
   align-items: center;
-  width: 100px;
-  height: 160px;
+  width: 120px;
+  height: 180px;
   border-radius: 8px;
   border: 1px solid black;
   padding: 10px;
+  margin: 0 auto;
 }
 
 .castList {

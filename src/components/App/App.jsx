@@ -4,6 +4,7 @@ import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import Navigation from '../Navigation/Navigation';
+import Layout from '../Layout/Layout';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('../../pages/MoviesPage/MoviesPage'));
@@ -20,37 +21,38 @@ const MovieReviews = lazy(() =>
 
 function App() {
   return (
-    <div className={css.container}>
-      <div className={css.header}>
-        <Navigation />
-      </div>
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/movies" element={<MoviesPage />} />
-          <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-            <Route
-              path="credits"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <MovieCast />
-                </Suspense>
-              }
-            />
-            <Route
-              path="reviews"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <MovieReviews />
-                </Suspense>
-              }
-            />
-          </Route>
+    <>
+      <Navigation />
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
-    </div>
+      <Layout>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/movies" element={<MoviesPage />} />
+            <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+              <Route
+                path="credits"
+                element={
+                  <Suspense fallback={<Loader />}>
+                    <MovieCast />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="reviews"
+                element={
+                  <Suspense fallback={<Loader />}>
+                    <MovieReviews />
+                  </Suspense>
+                }
+              />
+            </Route>
+
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+      </Layout>
+    </>
   );
 }
 
